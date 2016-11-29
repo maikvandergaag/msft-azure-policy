@@ -7,4 +7,4 @@ When you have created Policy definitions and you want to share them please add t
 ## More Information
 More information regarding policy definitions can be read on my blog.
 
-[Microsoft Playground](https://msftplayground.com "Microsoft Playground Homepage")
+[Define Azure Resource Manager Policies](https://msftplayground.com/2016/11/define-azure-resource-manager-policies/ "Microsoft Playground Azure Resource Manager Policies")
