@@ -4,9 +4,7 @@ param(
   [Parameter(Mandatory=$True,Position=1)]
   [string]$PolicyDescription = "",
   [Parameter(Mandatory=$True,Position=1)]
-  [string]$PolicyFile = "",
-  [Parameter(Mandatory=$True,Position=1)]
-  [string]$ResourceGroup = ""
+  [string]$PolicyFile = ""
 )
 
 #Login to the Azure Resource Management Account
@@ -24,10 +22,11 @@ clear
 $subId = (Get-AzureRmContext).Subscription.SubscriptionId
 $subName = (Get-AzureRmContext).Subscription.SubscriptionName
 
-Write-Host "Policy is applied to the resource group: $ResourceGroup in subscription: $subName" -ForegroundColor Yellow
+Write-Host "Policy is applied to the resource group: $resourceGroup in subscription: $subName" -ForegroundColor Yellow
 $policy = New-AzureRmPolicyDefinition -Name $PolicyName -Description $PolicyDescription -Policy $PolicyFile
 
 Write-Host "Assing the Policy to the resource group" -ForegroundColor Yellow
+
 #Assign the Azure Policy
-New-AzureRmPolicyAssignment -Name $PolicyName -PolicyDefinition $policy -Scope "/subscriptions/$subId/resourceGroups/$Resourcegroup"
+New-AzureRmPolicyAssignment -Name $PolicyName -PolicyDefinition $policy -Scope "/subscriptions/$subId"
 
