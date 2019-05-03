@@ -1,0 +1,38 @@
+{
+  "properties": {
+    "displayName": "Resource Group Naming",
+    "policyType": "Custom",
+    "mode": "All",
+    "metadata": {
+      "category": "Naming"
+    },
+    "parameters": {
+      "namePattern": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Naming convention",
+          "description": "Pattern for the naming convention (work with * and prefixes and suffixes)"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+          },
+          {
+            "not": {
+              "field": "name",
+              "like": "[parameters('namePattern')]"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    }
+  }
+}
